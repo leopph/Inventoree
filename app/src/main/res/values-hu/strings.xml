@@ -2,4 +2,5 @@
     <string name="app_name">Inventorí</string>
     <string name="uname_label">E-mail cím</string>
     <string name="pwd_label">Jelszó</string>
+    <string name="login_button_label">Bejelentkezés</string>
 </resources>
