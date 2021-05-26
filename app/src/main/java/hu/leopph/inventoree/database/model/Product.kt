@@ -11,6 +11,5 @@ class Product (
     var productSerialNumber: String,
     var startDate: Timestamp,
     var terminationDate: Timestamp,
-    var status: ProductStatusType) {
-
-}
+    var status: ProductStatusType,
+    var price: Price)
