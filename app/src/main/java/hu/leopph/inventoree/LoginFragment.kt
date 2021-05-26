@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -42,6 +44,24 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
 
     fun onLoginPressed(view: View) {
-        println("pereg a login")
+        if (m_Binding.unameEdittext.text.toString().isBlank() || m_Binding.unameEdittext.text.toString().isBlank())
+            return
+
+        requireActivity().supportFragmentManager.commit {
+            replace<LoadingFragment>(R.id.welcome_fragment_container)
+            setReorderingAllowed(true)
+            addToBackStack(null)
+        }
+
+        mAuth.signInWithEmailAndPassword(m_Binding.unameEdittext.text.toString(), m_Binding.pwdEdittext.text.toString())
+            .addOnCompleteListener(requireActivity()) { task ->
+                if (task.isSuccessful)
+                    println("pereg az epic")
+                else
+                    println("eef")
+            }
     }
+
+
+    class LoadingFragment : Fragment(R.layout.fragment_loading)
 }
