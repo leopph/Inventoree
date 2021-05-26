@@ -3,4 +3,5 @@
     <string name="uname_label">E-mail address</string>
     <string name="pwd_label">Password</string>
     <string name="login_button_label">Login</string>
+    <string name="bad_login">Invalid email or password!</string>
 </resources>

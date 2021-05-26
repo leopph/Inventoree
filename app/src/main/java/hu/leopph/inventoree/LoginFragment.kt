@@ -1,10 +1,12 @@
 package hu.leopph.inventoree
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
@@ -17,7 +19,7 @@ import hu.leopph.inventoree.databinding.FragmentLoginBinding
 class LoginFragment : Fragment(R.layout.fragment_login) {
     private lateinit var mAuth: FirebaseAuth
     private var _mBinding: FragmentLoginBinding? = null
-    private val m_Binding: FragmentLoginBinding get() = _mBinding!!
+    private val mBinding: FragmentLoginBinding get() = _mBinding!!
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,8 +34,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         savedInstanceState: Bundle?
     ): View {
         _mBinding = FragmentLoginBinding.inflate(inflater, container, false)
-        m_Binding.loginButton.setOnClickListener(this::onLoginPressed)
-        return m_Binding.root
+        mBinding.loginButton.setOnClickListener(this::onLoginPressed)
+        return mBinding.root
     }
 
 
@@ -43,23 +45,31 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
 
-    fun onLoginPressed(view: View) {
-        if (m_Binding.unameEdittext.text.toString().isBlank() || m_Binding.unameEdittext.text.toString().isBlank())
+    private fun onLoginPressed(@Suppress("UNUSED_PARAMETER") view: View) {
+        if (mBinding.unameEdittext.text.toString().isBlank() || mBinding.unameEdittext.text.toString().isBlank())
             return
 
+        mAuth.signInWithEmailAndPassword(mBinding.unameEdittext.text.toString(), mBinding.pwdEdittext.text.toString())
+            .addOnCompleteListener(requireActivity()) { task ->
+                if (task.isSuccessful)
+                    startActivity(Intent(requireContext(), ProductListActivity::class.java)
+                        .putExtra("UID", mAuth.currentUser?.uid))
+                else {
+                    swapFragment<LoginFragment>(R.id.welcome_fragment_container)
+                    Toast.makeText(requireContext(), R.string.bad_login, Toast.LENGTH_LONG).show()
+                }
+            }
+
+        swapFragment<LoadingFragment>(R.id.welcome_fragment_container)
+    }
+
+
+    private inline fun <reified T: Fragment> swapFragment(layoutID: Int) {
         requireActivity().supportFragmentManager.commit {
-            replace<LoadingFragment>(R.id.welcome_fragment_container)
+            replace<T>(layoutID)
             setReorderingAllowed(true)
             addToBackStack(null)
         }
-
-        mAuth.signInWithEmailAndPassword(m_Binding.unameEdittext.text.toString(), m_Binding.pwdEdittext.text.toString())
-            .addOnCompleteListener(requireActivity()) { task ->
-                if (task.isSuccessful)
-                    println("pereg az epic")
-                else
-                    println("eef")
-            }
     }
 
 

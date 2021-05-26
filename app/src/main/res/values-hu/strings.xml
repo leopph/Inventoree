@@ -3,4 +3,5 @@
     <string name="uname_label">E-mail cím</string>
     <string name="pwd_label">Jelszó</string>
     <string name="login_button_label">Bejelentkezés</string>
+    <string name="bad_login">Hibás e-mail vagy jelszó!</string>
 </resources>
