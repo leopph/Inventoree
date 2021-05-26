@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Inventoree</string>
+    <string name="uname_label">E-mail address</string>
+    <string name="pwd_label">Password</string>
 </resources>
