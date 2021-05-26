@@ -35,6 +35,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     ): View {
         _mBinding = FragmentLoginBinding.inflate(inflater, container, false)
         mBinding.loginButton.setOnClickListener(this::onLoginPressed)
+        mBinding.goToRegisterButton.setOnClickListener(this::onGoToRegister)
         return mBinding.root
     }
 
@@ -61,6 +62,11 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             }
 
         swapFragment<LoadingFragment>(R.id.welcome_fragment_container)
+    }
+
+
+    private fun onGoToRegister(@Suppress("UNUSED_PARAMETER") view: View) {
+        swapFragment<RegisterFragment>(R.id.welcome_fragment_container)
     }
 
 
