@@ -5,4 +5,10 @@
     <string name="login_button_label">Bejelentkezés</string>
     <string name="bad_login">Hibás e-mail vagy jelszó!</string>
     <string name="register_button_label">Nincs fiókja?</string>
+    <string name="pwd_conf_label">Jelszó még egyszer</string>
+    <string name="register_label">Regisztráció</string>
+    <string name="email_blank_error">Az e-mail cím nem lehet üres!</string>
+    <string name="pwd_blank_error">A jelszó nem lehet üres!</string>
+    <string name="pwd_conf_dont_match_error">A megadott jelszavak nem egyeznek!</string>
+    <string name="firebase_reg_error">Sikertelen regisztráció!</string>
 </resources>

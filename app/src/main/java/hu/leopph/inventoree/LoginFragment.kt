@@ -1,6 +1,7 @@
 package hu.leopph.inventoree
 
 
+import LoadingFragment
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -52,9 +53,14 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
         mAuth.signInWithEmailAndPassword(mBinding.unameEdittext.text.toString(), mBinding.pwdEdittext.text.toString())
             .addOnCompleteListener(requireActivity()) { task ->
-                if (task.isSuccessful)
-                    startActivity(Intent(requireContext(), ProductListActivity::class.java)
-                        .putExtra("UID", mAuth.currentUser?.uid))
+                requireActivity().supportFragmentManager.popBackStack()
+
+                if (task.isSuccessful) {
+                    startActivity(
+                        Intent(requireContext(), ProductListActivity::class.java)
+                            .putExtra("UID", mAuth.currentUser?.uid))
+                    swapFragment<LoginFragment>(R.id.welcome_fragment_container)
+                }
                 else {
                     swapFragment<LoginFragment>(R.id.welcome_fragment_container)
                     Toast.makeText(requireContext(), R.string.bad_login, Toast.LENGTH_LONG).show()
@@ -77,7 +83,4 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             addToBackStack(null)
         }
     }
-
-
-    class LoadingFragment : Fragment(R.layout.fragment_loading)
 }
