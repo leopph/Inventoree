@@ -12,6 +12,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import hu.leopph.inventoree.databinding.FragmentRegisterBinding
@@ -68,19 +71,26 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         }
 
         mAuth.createUserWithEmailAndPassword(email, pwd)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    startActivity(
-                        Intent(requireContext(), ProductListActivity::class.java)
-                            .putExtra("UID", mAuth.currentUser?.uid)
-                    )
+            .addOnSuccessListener {
+                startActivity(
+                    Intent(requireContext(), ProductListActivity::class.java)
+                        .putExtra("UID", mAuth.currentUser?.uid)
+                )
 
-                    swapFragment<LoginFragment>(R.id.welcome_fragment_container)
-                }
-                else {
-                    Toast.makeText(requireContext(), R.string.firebase_reg_error, Toast.LENGTH_LONG).show()
-                    swapFragment<RegisterFragment>(R.id.welcome_fragment_container)
-                }
+                swapFragment<LoginFragment>(R.id.welcome_fragment_container)
+            }
+            .addOnFailureListener { exception ->
+                Toast.makeText(
+                    requireContext(),
+                    when (exception) {
+                        is FirebaseAuthWeakPasswordException -> R.string.weak_pwd
+                        is FirebaseAuthInvalidCredentialsException -> R.string.malformed_email
+                        is FirebaseAuthUserCollisionException -> R.string.email_already_in_use
+                        else -> -1 // THIS IS NEVER REACHED
+                    },
+                    Toast.LENGTH_LONG).show()
+
+                requireActivity().supportFragmentManager.popBackStack()
             }
 
         swapFragment<LoadingFragment>(R.id.welcome_fragment_container)

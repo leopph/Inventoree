@@ -10,5 +10,7 @@
     <string name="email_blank_error">Az e-mail cím nem lehet üres!</string>
     <string name="pwd_blank_error">A jelszó nem lehet üres!</string>
     <string name="pwd_conf_dont_match_error">A megadott jelszavak nem egyeznek!</string>
-    <string name="firebase_reg_error">Sikertelen regisztráció!</string>
+    <string name="weak_pwd">A megadott jelszó nem elég erős!</string>
+    <string name="malformed_email">Érvénytelen e-mail cím!</string>
+    <string name="email_already_in_use">A megadott jelszó foglalt!</string>
 </resources>
