@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ProductListActivity" />
+        <activity android:name=".AddEditProductActivity" />
     </application>
 
 </manifest>
