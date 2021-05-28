@@ -13,4 +13,5 @@
     <string name="weak_pwd">A megadott jelszó nem elég erős!</string>
     <string name="malformed_email">Érvénytelen e-mail cím!</string>
     <string name="email_already_in_use">A megadott jelszó foglalt!</string>
+    <string name="logout_button_label">Kijelentkezés</string>
 </resources>

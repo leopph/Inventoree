@@ -13,4 +13,5 @@
     <string name="weak_pwd">Password is not strong enough!</string>
     <string name="malformed_email">E-mail is invalid!</string>
     <string name="email_already_in_use">E-mail is already in use!</string>
+    <string name="logout_button_label">Log out</string>
 </resources>

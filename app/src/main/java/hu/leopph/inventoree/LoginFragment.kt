@@ -52,19 +52,15 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             return
 
         mAuth.signInWithEmailAndPassword(mBinding.unameEdittext.text.toString(), mBinding.pwdEdittext.text.toString())
-            .addOnCompleteListener(requireActivity()) { task ->
+            .addOnSuccessListener {
+                startActivity(
+                    Intent(requireContext(), ProductListActivity::class.java)
+                        .putExtra("UID", mAuth.currentUser?.uid))
+                requireActivity().finish()
+            }
+            .addOnFailureListener {
                 requireActivity().supportFragmentManager.popBackStack()
-
-                if (task.isSuccessful) {
-                    startActivity(
-                        Intent(requireContext(), ProductListActivity::class.java)
-                            .putExtra("UID", mAuth.currentUser?.uid))
-                    swapFragment<LoginFragment>(R.id.welcome_fragment_container)
-                }
-                else {
-                    swapFragment<LoginFragment>(R.id.welcome_fragment_container)
-                    Toast.makeText(requireContext(), R.string.bad_login, Toast.LENGTH_LONG).show()
-                }
+                Toast.makeText(requireContext(), R.string.bad_login, Toast.LENGTH_LONG).show()
             }
 
         swapFragment<LoadingFragment>(R.id.welcome_fragment_container)

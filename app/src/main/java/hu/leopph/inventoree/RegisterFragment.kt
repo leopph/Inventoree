@@ -76,8 +76,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                     Intent(requireContext(), ProductListActivity::class.java)
                         .putExtra("UID", mAuth.currentUser?.uid)
                 )
-
-                swapFragment<LoginFragment>(R.id.welcome_fragment_container)
+                requireActivity().finish()
             }
             .addOnFailureListener { exception ->
                 Toast.makeText(
