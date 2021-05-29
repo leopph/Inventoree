@@ -24,7 +24,8 @@
     <string name="status_label">Státusz</string>
     <string name="price_label">Ár</string>
     <string name="taxrate_label">Adókulcs</string>
-    <string name="dutyfree_label">Nettó mennyiség</string>
+    <string name="dutyfree_label">Nettó</string>
+    <string name="taxincluded_label">Bruttó</string>
     <string name="amount_label">Mennyiség</string>
     <string name="currency_label">Pénznem</string>
     <string name="bad_prod_name_error">Hibás terméknév!</string>

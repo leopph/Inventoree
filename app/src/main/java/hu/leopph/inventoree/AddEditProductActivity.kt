@@ -17,6 +17,8 @@ import com.google.firebase.ktx.Firebase
 import hu.leopph.inventoree.database.model.Product
 import hu.leopph.inventoree.database.model.ProductStatusType
 import hu.leopph.inventoree.databinding.ActivityAddEditProductBinding
+import java.lang.IllegalArgumentException
+import java.lang.NumberFormatException
 import java.util.*
 
 
@@ -123,29 +125,90 @@ class AddEditProductActivity : AppCompatActivity() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         mBinding.prodStatusSpinner.adapter = adapter
         mBinding.prodStatusSpinner.setSelection(product.status.ordinal)
+        mBinding.dutyFreeAmountEdittext.text.insert(0, product.price.dutyFreeAmount.value.toString())
+        mBinding.dutyFreeCurrencyEdittext.text.insert(0, product.price.dutyFreeAmount.unit.currencyCode)
+        mBinding.taxIncludedAmountEdittext.text.insert(0, product.price.taxIncludedAmount.value.toString())
+        mBinding.taxIncludedCurrencyEdittext.text.insert(0, product.price.taxIncludedAmount.unit.currencyCode)
+        mBinding.taxrateEdittext.text.insert(0, product.price.taxRate.toString())
     }
 
 
     fun onSavePressed(@Suppress("UNUSED_PARAMETER") view: View) {
+        // CHECK FOR EMPTY PRODUCT NAME
         val productName = mBinding.prodNameEdittext.text.toString()
-
         if (productName.isBlank()) {
             Toast.makeText(this, R.string.bad_prod_name_error, Toast.LENGTH_LONG).show()
             return
         }
 
+        // CHECK FOR EMPTY SERIAL NUMBER
         val serialNumber = mBinding.prodSerialEdittext.text.toString()
-
         if (serialNumber.isBlank()) {
             Toast.makeText(this, R.string.bad_serial_error, Toast.LENGTH_LONG).show()
             return
         }
 
+        // CHECK FOR VALID NUMBER
+        val dutyFreeAmount: Float
+        try {
+            dutyFreeAmount = mBinding.dutyFreeAmountEdittext.text.toString().toFloat()
+        }
+        catch (exception: NumberFormatException) {
+            // ERROR
+            return
+        }
+
+        // CHECK FOR VALID CURRENCY
+        val dutyFreeCurrency: Currency
+        try {
+            dutyFreeCurrency = Currency.getInstance(mBinding.dutyFreeCurrencyEdittext.text.toString())
+        }
+        catch (exception: IllegalArgumentException) {
+            // ERROR
+            return
+        }
+
+        // CHECK FOR VALID NUMBER
+        val taxIncludedAmount: Float
+        try {
+            taxIncludedAmount = mBinding.taxIncludedAmountEdittext.text.toString().toFloat()
+        }
+        catch (exception: NumberFormatException) {
+            // ERROR
+            return
+        }
+
+        // CHECK FOR VALID CURRENCY
+        val taxIncludedCurrency: Currency
+        try {
+            taxIncludedCurrency = Currency.getInstance(mBinding.taxIncludedCurrencyEdittext.text.toString())
+        }
+        catch (exception: IllegalArgumentException) {
+            // ERROR
+            return
+        }
+
+        // CHECK FOR VALID NUMBER
+        val taxRate: Float
+        try {
+            taxRate = mBinding.taxrateEdittext.text.toString().toFloat()
+        }
+        catch (exception: NumberFormatException) {
+            // ERROR
+            return
+        }
+
+        // SET PRODUCT VALUES
         val product = intent.getParcelableExtra<Product>("product")!!
         product.name = productName
         product.description = mBinding.prodDescEdittext.text.toString()
         product.isBundle = mBinding.prodBundleToggle.isChecked
         product.productSerialNumber = serialNumber
+        product.price.dutyFreeAmount.unit = dutyFreeCurrency
+        product.price.dutyFreeAmount.value = dutyFreeAmount
+        product.price.taxIncludedAmount.unit = taxIncludedCurrency
+        product.price.taxIncludedAmount.value = taxIncludedAmount
+        product.price.taxRate = taxRate
 
         product.orderDate = Timestamp(
             java.text.DateFormat.getDateInstance(
@@ -162,6 +225,8 @@ class AddEditProductActivity : AppCompatActivity() {
                 java.text.DateFormat.SHORT, Locale.getDefault())
                 .parse(mBinding.termdateEdittext.text.toString())!!)
 
+
+        // GO BACK TO LISTING
         setResult(RESULT_OK,
             Intent(this, ProductListActivity::class.java)
                 .putExtra("product", product))

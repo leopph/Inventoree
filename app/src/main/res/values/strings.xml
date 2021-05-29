@@ -28,7 +28,8 @@
     <string name="status_label">Status</string>
     <string name="price_label">Price</string>
     <string name="taxrate_label">Tax rate</string>
-    <string name="dutyfree_label">Duty free amount</string>
+    <string name="dutyfree_label">Duty free</string>
+    <string name="taxincluded_label">Tax included</string>
     <string name="amount_label">Amount</string>
     <string name="currency_label">Currency</string>
     <string name="bad_prod_name_error">Bad product name!</string>
