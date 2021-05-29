@@ -59,11 +59,11 @@ class ProductAdapter(
         return mProductList.size
     }
 
-    class ViewHolder(val mBinding: ProductListingBinding) : RecyclerView.ViewHolder(mBinding.root) {
+    class ViewHolder(private val mBinding: ProductListingBinding) : RecyclerView.ViewHolder(mBinding.root) {
         fun bind(product: Product) {
             mBinding.name.text = product.name
             mBinding.status.text = product.status.toString()
-            mBinding.orderdate.text = DateFormat.getDateFormat(itemView.context.applicationContext).format(product.orderDate)
+            mBinding.orderdate.text = DateFormat.getDateFormat(itemView.context.applicationContext).format(product.orderDate.toDate())
         }
     }
 

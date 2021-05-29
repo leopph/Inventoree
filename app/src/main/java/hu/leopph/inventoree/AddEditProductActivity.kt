@@ -208,6 +208,7 @@ class AddEditProductActivity : AppCompatActivity() {
         product.price.dutyFreeAmount.value = dutyFreeAmount
         product.price.taxIncludedAmount.unit = taxIncludedCurrency
         product.price.taxIncludedAmount.value = taxIncludedAmount
+        product.status = ProductStatusType.valueOf(mBinding.prodStatusSpinner.selectedItem.toString())
         product.price.taxRate = taxRate
 
         product.orderDate = Timestamp(

@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -34,6 +35,7 @@ class ProductListActivity : AppCompatActivity() {
             product.id = if (mProductList.isEmpty()) "0" else java.lang.Long.toHexString(java.lang.Long.parseLong(mProductList[0].id) + 1)
             mCollection.add(product).addOnSuccessListener {
                 mProductList.add(product)
+                mBinding.recyclerView.adapter?.notifyDataSetChanged()
             }
         }
     }
@@ -62,6 +64,8 @@ class ProductListActivity : AppCompatActivity() {
                     .putExtra("UID", mAuth.currentUser?.uid))
         }
 
+        mBinding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        mBinding.recyclerView.adapter = ProductAdapter(mProductList)
         query()
     }
 
@@ -89,6 +93,8 @@ class ProductListActivity : AppCompatActivity() {
                     price = price
                 ))
             }
+
+            mBinding.recyclerView.adapter?.notifyDataSetChanged()
         }
     }
 }
