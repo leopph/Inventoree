@@ -69,8 +69,25 @@ class ProductListActivity : AppCompatActivity() {
     private fun query() {
         mProductList.clear()
 
-        mCollection.get().addOnSuccessListener{
+        mCollection.orderBy("id", Query.Direction.DESCENDING).get().addOnSuccessListener{
             for (item in it) {
+                val dutyFree = Money(Currency.getInstance(item["price.dutyFreeAmount.unit.currencyCode"] as String), (item["price.dutyFreeAmount.value"] as Double).toFloat())
+                val taxIncluded = Money(Currency.getInstance(item["price.taxIncludedAmount.unit.currencyCode"] as String), (item["price.taxIncludedAmount.value"] as Double).toFloat())
+                val taxRate = (item["price.taxRate"] as Double).toFloat()
+                val price = Price(taxRate = taxRate, dutyFreeAmount = dutyFree, taxIncludedAmount = taxIncluded)
+
+                mProductList.add(Product(
+                    id = item["id"] as String,
+                    description = item["description"] as String,
+                    isBundle = item["bundle"] as Boolean,
+                    name = item["name"] as String,
+                    orderDate = item["orderDate"] as Timestamp,
+                    productSerialNumber = item["productSerialNumber"] as String,
+                    startDate = item["startDate"] as Timestamp,
+                    terminationDate = item["terminationDate"] as Timestamp,
+                    status = ProductStatusType.valueOf(item["status"] as String),
+                    price = price
+                ))
             }
         }
     }
