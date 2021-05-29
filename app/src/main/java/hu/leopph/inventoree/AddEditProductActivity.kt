@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Timestamp
@@ -14,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import hu.leopph.inventoree.database.model.Product
+import hu.leopph.inventoree.database.model.ProductStatusType
 import hu.leopph.inventoree.databinding.ActivityAddEditProductBinding
 import java.util.*
 
@@ -117,6 +119,10 @@ class AddEditProductActivity : AppCompatActivity() {
         mBinding.orderdateEdittext.text.insert(0, DateFormat.getDateFormat(applicationContext).format(product.orderDate.toDate()))
         mBinding.startdateEdittext.text.insert(0, DateFormat.getDateFormat(applicationContext).format(product.startDate.toDate()))
         mBinding.termdateEdittext.text.insert(0, DateFormat.getDateFormat(applicationContext).format(product.terminationDate.toDate()))
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, ProductStatusType.values())
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        mBinding.prodStatusSpinner.adapter = adapter
+        mBinding.prodStatusSpinner.setSelection(product.status.ordinal)
     }
 
 
