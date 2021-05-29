@@ -14,4 +14,19 @@
     <string name="malformed_email">Érvénytelen e-mail cím!</string>
     <string name="email_already_in_use">A megadott jelszó foglalt!</string>
     <string name="logout_button_label">Kijelentkezés</string>
+    <string name="name_label">Név</string>
+    <string name="desc_label">Leírás</string>
+    <string name="bundle_label">Batyu?</string>
+    <string name="orderdate_label">Rendelés ideje</string>
+    <string name="startdate_label">Érvényesség kezdete</string>
+    <string name="terminationdate_label">Érvényesség vége</string>
+    <string name="serialnumber_label">Sorozatszám</string>
+    <string name="status_label">Státusz</string>
+    <string name="price_label">Ár</string>
+    <string name="taxrate_label">Adókulcs</string>
+    <string name="dutyfree_label">Nettó mennyiség</string>
+    <string name="amount_label">Mennyiség</string>
+    <string name="currency_label">Pénznem</string>
+    <string name="bad_prod_name_error">Hibás terméknév!</string>
+    <string name="product_save_button">Mentés</string>
 </resources>

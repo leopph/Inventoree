@@ -29,6 +29,12 @@ class ProductListActivity : AppCompatActivity() {
 
     private val newProductCallback = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
+            val product = result.data?.getParcelableExtra<Product>("product")!!
+            mCollection.add(product)
+            mProductList.add(product)
+        }
+        else {
+            println("oof")
         }
     }
 
@@ -63,7 +69,7 @@ class ProductListActivity : AppCompatActivity() {
     private fun query() {
         mProductList.clear()
 
-        mCollection .get().addOnSuccessListener{
+        mCollection.get().addOnSuccessListener{
             for (item in it) {
             }
         }

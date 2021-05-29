@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">Inventoree</string>
+
     <string name="uname_label">E-mail address</string>
     <string name="pwd_label">Password</string>
     <string name="login_button_label">Login</string>
     <string name="bad_login">Invalid email or password!</string>
+
     <string name="register_button_label">Don\'t have an account?</string>
     <string name="pwd_conf_label">Password again</string>
     <string name="register_label">Register</string>
@@ -13,5 +15,22 @@
     <string name="weak_pwd">Password is not strong enough!</string>
     <string name="malformed_email">E-mail is invalid!</string>
     <string name="email_already_in_use">E-mail is already in use!</string>
+
     <string name="logout_button_label">Log out</string>
+
+    <string name="name_label">Name</string>
+    <string name="desc_label">Description</string>
+    <string name="bundle_label">Is it a bundle?</string>
+    <string name="orderdate_label">Order date</string>
+    <string name="startdate_label">Start date</string>
+    <string name="terminationdate_label">Termination date</string>
+    <string name="serialnumber_label">Serial number</string>
+    <string name="status_label">Status</string>
+    <string name="price_label">Price</string>
+    <string name="taxrate_label">Tax rate</string>
+    <string name="dutyfree_label">Duty free amount</string>
+    <string name="amount_label">Amount</string>
+    <string name="currency_label">Currency</string>
+    <string name="bad_prod_name_error">Bad product name!</string>
+    <string name="product_save_button">Save</string>
 </resources>
