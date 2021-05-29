@@ -1,6 +1,7 @@
 package hu.leopph.inventoree
 
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
@@ -130,28 +131,7 @@ class AddEditProductActivity : AppCompatActivity() {
         val serialNumber = mBinding.prodSerialEdittext.text.toString()
 
         if (serialNumber.isBlank()) {
-            // ERROR
-            return
-        }
-
-        val orderDate = mBinding.orderdateEdittext.text.toString()
-
-        if (orderDate.isBlank()) {
-            // ERROR
-            return
-        }
-
-        val startDate = mBinding.startdateEdittext.text.toString()
-
-        if (startDate.isBlank()) {
-            // ERROR
-            return
-        }
-
-        val termDate = mBinding.termdateEdittext.text.toString()
-
-        if (termDate.isBlank()) {
-            // ERROR
+            Toast.makeText(this, R.string.bad_serial_error, Toast.LENGTH_LONG).show()
             return
         }
 
@@ -164,21 +144,32 @@ class AddEditProductActivity : AppCompatActivity() {
         product.orderDate = Timestamp(
             java.text.DateFormat.getDateInstance(
                 java.text.DateFormat.SHORT, Locale.getDefault())
-                .parse(orderDate)!!)
+                .parse(mBinding.orderdateEdittext.text.toString())!!)
 
         product.startDate = Timestamp(
             java.text.DateFormat.getDateInstance(
                 java.text.DateFormat.SHORT, Locale.getDefault())
-                .parse(startDate)!!)
+                .parse(mBinding.startdateEdittext.text.toString())!!)
 
         product.terminationDate = Timestamp(
             java.text.DateFormat.getDateInstance(
                 java.text.DateFormat.SHORT, Locale.getDefault())
-                .parse(termDate)!!)
+                .parse(mBinding.termdateEdittext.text.toString())!!)
 
         setResult(RESULT_OK,
             Intent(this, ProductListActivity::class.java)
                 .putExtra("product", product))
         finish()
+    }
+
+
+    private fun onCancel() {
+        setResult(Activity.RESULT_CANCELED)
+        finish()
+    }
+
+
+    override fun onBackPressed() {
+        onCancel()
     }
 }

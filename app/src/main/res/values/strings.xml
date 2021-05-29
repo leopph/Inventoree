@@ -33,4 +33,5 @@
     <string name="currency_label">Currency</string>
     <string name="bad_prod_name_error">Bad product name!</string>
     <string name="product_save_button">Save</string>
+    <string name="bad_serial_error">Bad serial number!</string>
 </resources>

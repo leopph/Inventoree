@@ -11,6 +11,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.ktx.Firebase
 import hu.leopph.inventoree.database.model.Money
 import hu.leopph.inventoree.database.model.Price
@@ -30,11 +31,10 @@ class ProductListActivity : AppCompatActivity() {
     private val newProductCallback = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             val product = result.data?.getParcelableExtra<Product>("product")!!
-            mCollection.add(product)
-            mProductList.add(product)
-        }
-        else {
-            println("oof")
+            product.id = if (mProductList.isEmpty()) "0" else java.lang.Long.toHexString(java.lang.Long.parseLong(mProductList[0].id) + 1)
+            mCollection.add(product).addOnSuccessListener {
+                mProductList.add(product)
+            }
         }
     }
 
