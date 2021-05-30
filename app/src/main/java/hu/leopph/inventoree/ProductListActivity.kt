@@ -4,6 +4,7 @@ package hu.leopph.inventoree
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,10 +33,26 @@ class ProductListActivity : AppCompatActivity() {
     private val newProductCallback = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             val product = result.data?.getParcelableExtra<Product>("product")!!
-            product.id = if (mProductList.isEmpty()) "0" else java.lang.Long.toHexString(java.lang.Long.parseLong(mProductList[0].id) + 1)
             mCollection.add(product).addOnSuccessListener {
-                mProductList.add(product)
-                mBinding.recyclerView.adapter?.notifyDataSetChanged()
+                product.id = it.id
+                it.update("id", it.id).addOnSuccessListener {
+                    mProductList.add(product)
+                    mBinding.recyclerView.adapter?.notifyDataSetChanged()
+                }
+            }
+        }
+    }
+
+    private val editProductCallback = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val product = result.data?.getParcelableExtra<Product>("product")!!
+            mCollection.document(product.id.toString()).delete().addOnSuccessListener {
+                mCollection.add(product).addOnSuccessListener {
+                    product.id = it.id
+                    it.update("id", it.id).addOnSuccessListener {
+                        query()
+                    }
+                }
             }
         }
     }
@@ -65,7 +82,7 @@ class ProductListActivity : AppCompatActivity() {
         }
 
         mBinding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        mBinding.recyclerView.adapter = ProductAdapter(mProductList)
+        mBinding.recyclerView.adapter = ProductAdapter(mProductList, editProductCallback)
         query()
     }
 

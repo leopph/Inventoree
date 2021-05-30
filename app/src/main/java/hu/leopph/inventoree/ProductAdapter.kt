@@ -1,20 +1,27 @@
 package hu.leopph.inventoree
 
 
+import android.content.Intent
 import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import androidx.activity.result.ActivityResultLauncher
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import hu.leopph.inventoree.database.model.Product
 import hu.leopph.inventoree.databinding.ProductListingBinding
 
 
 class ProductAdapter(
-    productList: List<Product>
+    productList: List<Product>,
+    private val mEditProductCallback: ActivityResultLauncher<Intent>
 ) : RecyclerView.Adapter<ProductAdapter.ViewHolder>(), Filterable {
 
+    private val mAuth: FirebaseAuth by lazy { Firebase.auth }
     private var mProductList = productList
     private val mAllProductList = productList
 
@@ -53,6 +60,12 @@ class ProductAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(mProductList[position])
+        holder.itemView.setOnClickListener {
+            mEditProductCallback.launch(
+                Intent(holder.itemView.context, AddEditProductActivity::class.java)
+                    .putExtra("product", mProductList[position])
+                    .putExtra("UID", mAuth.currentUser?.uid))
+        }
     }
 
     override fun getItemCount(): Int {
