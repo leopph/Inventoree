@@ -33,4 +33,7 @@
     <string name="bad_serial_error">Hibás sorozatszám!</string>
 
     <string name="delete_button_label">Törlés</string>
+    <string name="invalid_amount">Érvénytelen ár!</string>
+    <string name="invalid_currency">Érvénytelen pénznem!</string>
+    <string name="invalid_taxrate">Érvénytelen adókulcs!</string>
 </resources>

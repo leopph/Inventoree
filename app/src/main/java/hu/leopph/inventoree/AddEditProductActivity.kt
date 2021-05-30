@@ -154,7 +154,7 @@ class AddEditProductActivity : AppCompatActivity() {
             dutyFreeAmount = mBinding.prodDfreeAmountEntry.editText?.text.toString().toFloat()
         }
         catch (exception: NumberFormatException) {
-            // ERROR
+            Toast.makeText(this, R.string.invalid_amount, Toast.LENGTH_LONG).show()
             return
         }
 
@@ -164,7 +164,7 @@ class AddEditProductActivity : AppCompatActivity() {
             dutyFreeCurrency = Currency.getInstance(mBinding.prodDfreeCurrEntry.editText?.text.toString())
         }
         catch (exception: IllegalArgumentException) {
-            // ERROR
+            Toast.makeText(this, R.string.invalid_currency, Toast.LENGTH_LONG).show()
             return
         }
 
@@ -174,7 +174,7 @@ class AddEditProductActivity : AppCompatActivity() {
             taxIncludedAmount = mBinding.prodTaxIncAmountEntry.editText?.text.toString().toFloat()
         }
         catch (exception: NumberFormatException) {
-            // ERROR
+            Toast.makeText(this, R.string.invalid_amount, Toast.LENGTH_LONG).show()
             return
         }
 
@@ -184,7 +184,7 @@ class AddEditProductActivity : AppCompatActivity() {
             taxIncludedCurrency = Currency.getInstance(mBinding.prodTaxincCurrEntry.editText?.text.toString())
         }
         catch (exception: IllegalArgumentException) {
-            // ERROR
+            Toast.makeText(this, R.string.invalid_currency, Toast.LENGTH_LONG).show()
             return
         }
 
@@ -194,7 +194,7 @@ class AddEditProductActivity : AppCompatActivity() {
             taxRate = mBinding.prodTaxrateEntry.editText?.text.toString().toFloat()
         }
         catch (exception: NumberFormatException) {
-            // ERROR
+            Toast.makeText(this, R.string.invalid_taxrate, Toast.LENGTH_LONG).show()
             return
         }
 
