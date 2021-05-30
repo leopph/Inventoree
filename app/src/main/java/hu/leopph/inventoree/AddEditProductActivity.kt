@@ -123,7 +123,8 @@ class AddEditProductActivity : AppCompatActivity() {
         mBinding.prodStartdateEntry.editText?.text?.insert(0, DateFormat.getDateFormat(applicationContext).format(product.startDate.toDate()))
         mBinding.prodTermdateEntry.editText?.text?.insert(0, DateFormat.getDateFormat(applicationContext).format(product.terminationDate.toDate()))
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, ProductStatusType.values())
-        (mBinding.prodStatusDropdown.editText as? AutoCompleteTextView)?.setAdapter(adapter) // TODO set default
+        (mBinding.prodStatusDropdown.editText as? AutoCompleteTextView)?.text?.insert(0, product.status.toString())
+        (mBinding.prodStatusDropdown.editText as? AutoCompleteTextView)?.setAdapter(adapter)
         mBinding.prodDfreeAmountEntry.editText?.text?.insert(0, product.price.dutyFreeAmount.value.toString())
         mBinding.prodDfreeCurrEntry.editText?.text?.insert(0, product.price.dutyFreeAmount.unit.currencyCode)
         mBinding.prodTaxIncAmountEntry.editText?.text?.insert(0, product.price.taxIncludedAmount.value.toString())
