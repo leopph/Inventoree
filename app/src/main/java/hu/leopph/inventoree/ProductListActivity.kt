@@ -66,13 +66,11 @@ class ProductListActivity : AppCompatActivity() {
         if (intent.getStringExtra("UID") != mAuth.currentUser?.uid)
             finish()
 
-        /*mBinding.unameLabel.text = "Hello, ${mAuth.currentUser?.email}" // DEBUG
-
         mBinding.signoutButton.setOnClickListener {
             mAuth.signOut()
             startActivity(Intent(this, WelcomeActivity::class.java))
             finish()
-        }*/
+        }
 
         mBinding.searchview.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean = false
@@ -82,10 +80,6 @@ class ProductListActivity : AppCompatActivity() {
                 return false
             }
         })
-
-        mBinding.searchview.setOnClickListener {
-            mBinding.searchview.isIconified = false
-        }
 
         mBinding.fab.setOnClickListener {
             newProductCallback.launch(
