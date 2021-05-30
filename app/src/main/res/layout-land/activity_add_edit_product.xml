@@ -12,9 +12,10 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="200sp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:hint="@string/name_label"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -31,8 +32,10 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="200sp"
         android:layout_height="100sp"
+        android:layout_marginTop="4dp"
         android:hint="@string/desc_label"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/prod_name_entry">
 
@@ -50,9 +53,9 @@
         android:layout_height="wrap_content"
         android:text="@string/bundle_label"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.041"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/prod_desc_entry" />
-
+        app:layout_constraintTop_toBottomOf="@+id/prod_serial_entry" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/prod_serial_entry"
@@ -61,9 +64,9 @@
         android:layout_height="wrap_content"
         android:hint="@string/serialnumber_label"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/prod_bundle_toggle">
+        app:layout_constraintTop_toBottomOf="@+id/prod_desc_entry">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -78,11 +81,12 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="200sp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:hint="@string/orderdate_label"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/prod_serial_entry">
+        app:layout_constraintHorizontal_bias="0.021"
+        app:layout_constraintStart_toEndOf="@+id/prod_name_entry"
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -91,15 +95,16 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/prod_startdate_entry"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="200sp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:hint="@string/startdate_label"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.021"
+        app:layout_constraintStart_toEndOf="@+id/prod_desc_entry"
         app:layout_constraintTop_toBottomOf="@+id/prod_orderdate_entry">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -115,9 +120,11 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="200sp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:hint="@string/terminationdate_label"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.021"
+        app:layout_constraintStart_toEndOf="@+id/prod_desc_entry"
         app:layout_constraintTop_toBottomOf="@+id/prod_startdate_entry">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -133,9 +140,11 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="200sp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:hint="@string/status_label"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.021"
+        app:layout_constraintStart_toEndOf="@+id/prod_serial_entry"
         app:layout_constraintTop_toBottomOf="@+id/prod_termdate_entry">
 
         <AutoCompleteTextView
@@ -145,45 +154,49 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
     <TextView
         android:id="@+id/pricelabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         android:text="@string/price_label"
         android:textAlignment="center"
         android:textSize="@dimen/label_text_size"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.474"
+        app:layout_constraintHorizontal_bias="0.759"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/prod_status_dropdown" />
-
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/dutyfreelabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="60dp"
         android:text="@string/dutyfree_label"
         android:textAlignment="center"
         android:textSize="@dimen/label_text_size"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/taxincludedlabel"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.097"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/prod_termdate_entry"
         app:layout_constraintTop_toBottomOf="@+id/prod_taxrate_entry"
-        app:layout_constraintVertical_bias="0.099" />
+        app:layout_constraintVertical_bias="0.024" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/prod_dfree_amount_entry"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="100sp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
         android:hint="@string/amount_label"
+        app:layout_constraintBottom_toTopOf="@+id/prod_tax_inc_amount_entry"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/dutyfreelabel"
-        app:layout_constraintTop_toBottomOf="@+id/prod_taxrate_entry">
+        app:layout_constraintTop_toBottomOf="@+id/prod_taxrate_entry"
+        app:layout_constraintVertical_bias="0.205">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -197,12 +210,13 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="100sp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="4dp"
         android:hint="@string/currency_label"
+        app:layout_constraintBottom_toTopOf="@+id/prod_taxinc_curr_entry"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.265"
-        app:layout_constraintStart_toEndOf="@+id/prod_dfree_amount_entry"
-        app:layout_constraintTop_toBottomOf="@+id/prod_taxrate_entry">
+        app:layout_constraintTop_toBottomOf="@+id/prod_taxrate_entry"
+        app:layout_constraintVertical_bias="0.235">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -215,27 +229,25 @@
         android:id="@+id/taxincludedlabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:text="@string/taxincluded_label"
         android:textSize="@dimen/label_text_size"
-        app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/prod_dfree_amount_entry"
-        app:layout_constraintVertical_bias="0.432" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/prod_status_dropdown"
+        tools:layout_editor_absoluteY="218dp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/prod_tax_inc_amount_entry"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="100sp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="8dp"
         android:hint="@string/amount_label"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/taxincludedlabel"
-        app:layout_constraintTop_toBottomOf="@+id/prod_dfree_amount_entry"
-        app:layout_constraintVertical_bias="0.0">
+        tools:layout_editor_absoluteY="206dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -249,14 +261,10 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="100sp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginEnd="4dp"
         android:hint="@string/currency_label"
-        app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.27"
-        app:layout_constraintStart_toEndOf="@+id/prod_tax_inc_amount_entry"
-        app:layout_constraintTop_toBottomOf="@+id/prod_dfree_curr_entry"
-        app:layout_constraintVertical_bias="0.0">
+        tools:layout_editor_absoluteY="206dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -270,10 +278,11 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="200sp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:hint="@string/taxrate_label"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.387"
+        app:layout_constraintStart_toEndOf="@+id/prod_orderdate_entry"
         app:layout_constraintTop_toBottomOf="@+id/pricelabel">
 
         <com.google.android.material.textfield.TextInputEditText
