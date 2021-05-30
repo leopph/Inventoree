@@ -48,10 +48,11 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
 
     private fun onLoginPressed(@Suppress("UNUSED_PARAMETER") view: View) {
-        if (mBinding.unameEdittext.text.toString().isBlank() || mBinding.unameEdittext.text.toString().isBlank())
+        val email = mBinding.emailEntry.editText?.text.toString()
+        if (email.isBlank() || email.isBlank())
             return
 
-        mAuth.signInWithEmailAndPassword(mBinding.unameEdittext.text.toString(), mBinding.pwdEdittext.text.toString())
+        mAuth.signInWithEmailAndPassword(email, mBinding.passwordEntry.editText?.text.toString())
             .addOnSuccessListener {
                 startActivity(
                     Intent(requireContext(), ProductListActivity::class.java)
