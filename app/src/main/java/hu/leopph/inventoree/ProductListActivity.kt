@@ -83,6 +83,10 @@ class ProductListActivity : AppCompatActivity() {
             }
         })
 
+        mBinding.searchview.setOnClickListener {
+            mBinding.searchview.isIconified = false
+        }
+
         mBinding.fab.setOnClickListener {
             newProductCallback.launch(
                 Intent(this, AddEditProductActivity::class.java)
