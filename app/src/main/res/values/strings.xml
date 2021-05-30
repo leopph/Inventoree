@@ -35,4 +35,6 @@
     <string name="bad_prod_name_error">Bad product name!</string>
     <string name="product_save_button">Save</string>
     <string name="bad_serial_error">Bad serial number!</string>
+
+    <string name="delete_button_label">Delete</string>
 </resources>

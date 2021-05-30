@@ -31,4 +31,6 @@
     <string name="bad_prod_name_error">Hibás terméknév!</string>
     <string name="product_save_button">Mentés</string>
     <string name="bad_serial_error">Hibás sorozatszám!</string>
+
+    <string name="delete_button_label">Törlés</string>
 </resources>

@@ -24,6 +24,7 @@ class ProductAdapter(
     private val mAuth: FirebaseAuth by lazy { Firebase.auth }
     private var mProductList = productList
     private val mAllProductList = productList
+    private var mDeleteCallback: ((Product) -> Unit)? = null
 
     private val mFilter = object : Filter() {
         override fun performFiltering(constraint: CharSequence?): FilterResults {
@@ -72,11 +73,18 @@ class ProductAdapter(
         return mProductList.size
     }
 
-    class ViewHolder(private val mBinding: ProductListingBinding) : RecyclerView.ViewHolder(mBinding.root) {
+    fun setOnDeleteListener(func: ((Product) -> Unit)?) {
+        mDeleteCallback = func
+    }
+
+    inner class ViewHolder(private val mBinding: ProductListingBinding) : RecyclerView.ViewHolder(mBinding.root) {
         fun bind(product: Product) {
             mBinding.name.text = product.name
             mBinding.status.text = product.status.toString()
             mBinding.orderdate.text = DateFormat.getDateFormat(itemView.context.applicationContext).format(product.orderDate.toDate())
+            mBinding.button2.setOnClickListener {
+                mDeleteCallback?.invoke(product)
+            }
         }
     }
 

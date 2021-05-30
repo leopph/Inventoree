@@ -46,7 +46,7 @@ class ProductListActivity : AppCompatActivity() {
     private val editProductCallback = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             val product = result.data?.getParcelableExtra<Product>("product")!!
-            mCollection.document(product.id.toString()).delete().addOnSuccessListener {
+            mCollection.document(product.id).delete().addOnSuccessListener {
                 mCollection.add(product).addOnSuccessListener {
                     product.id = it.id
                     it.update("id", it.id).addOnSuccessListener {
@@ -82,7 +82,14 @@ class ProductListActivity : AppCompatActivity() {
         }
 
         mBinding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        mBinding.recyclerView.adapter = ProductAdapter(mProductList, editProductCallback)
+        val adapter = ProductAdapter(mProductList, editProductCallback)
+        adapter.setOnDeleteListener {
+            mCollection.document(it.id).delete().addOnSuccessListener { _ ->
+                mProductList.remove(it)
+                adapter.notifyDataSetChanged()
+            }
+        }
+        mBinding.recyclerView.adapter = adapter
         query()
     }
 
