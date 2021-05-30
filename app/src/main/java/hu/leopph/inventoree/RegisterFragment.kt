@@ -50,21 +50,18 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
 
     private fun onRegisterPressed(@Suppress("UNUSED_PARAMETER") view: View) {
-        val email = mBinding.regEmailEdittext.text.toString()
-
+        val email = mBinding.regEmailEntry.editText?.text.toString()
         if (email.isBlank()) {
             Toast.makeText(requireContext(), R.string.email_blank_error, Toast.LENGTH_LONG).show()
             return
         }
 
-        val pwd = mBinding.regPwdEdittext.text.toString()
-        val pwdConf = mBinding.regPwdConfEdittext.text.toString()
-
+        val pwd = mBinding.regPwdEntry.editText?.text.toString()
+        val pwdConf = mBinding.regPwdConfEntry.editText?.text.toString()
         if (pwd.isBlank() || pwdConf.isBlank()) {
             Toast.makeText(requireContext(), R.string.pwd_blank_error, Toast.LENGTH_LONG).show()
             return
         }
-
         if (pwd != pwdConf) {
             Toast.makeText(requireContext(), R.string.pwd_conf_dont_match_error, Toast.LENGTH_LONG).show()
             return
