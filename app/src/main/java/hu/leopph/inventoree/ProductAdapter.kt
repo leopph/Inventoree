@@ -55,9 +55,8 @@ class ProductAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(ProductListingBinding.inflate(LayoutInflater.from(parent.context), parent, false))
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
+        ViewHolder(ProductListingBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(mProductList[position])
@@ -69,9 +68,7 @@ class ProductAdapter(
         }
     }
 
-    override fun getItemCount(): Int {
-        return mProductList.size
-    }
+    override fun getItemCount(): Int = mProductList.size
 
     fun setOnDeleteListener(func: ((Product) -> Unit)?) {
         mDeleteCallback = func
@@ -88,7 +85,5 @@ class ProductAdapter(
         }
     }
 
-    override fun getFilter(): Filter {
-        return mFilter
-    }
+    override fun getFilter(): Filter = mFilter
 }

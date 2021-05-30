@@ -4,7 +4,7 @@ package hu.leopph.inventoree
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
+import android.widget.SearchView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -66,13 +66,22 @@ class ProductListActivity : AppCompatActivity() {
         if (intent.getStringExtra("UID") != mAuth.currentUser?.uid)
             finish()
 
-        mBinding.unameLabel.text = "Hello, ${mAuth.currentUser?.email}" // DEBUG
+        /*mBinding.unameLabel.text = "Hello, ${mAuth.currentUser?.email}" // DEBUG
 
         mBinding.signoutButton.setOnClickListener {
             mAuth.signOut()
             startActivity(Intent(this, WelcomeActivity::class.java))
             finish()
-        }
+        }*/
+
+        mBinding.searchview.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean = false
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                (mBinding.recyclerView.adapter as ProductAdapter).filter.filter(newText)
+                return false
+            }
+        })
 
         mBinding.fab.setOnClickListener {
             newProductCallback.launch(
