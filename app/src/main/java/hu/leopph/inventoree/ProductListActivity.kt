@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,6 +30,9 @@ class ProductListActivity : AppCompatActivity() {
     private val mFirestore: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
     private val mCollection: CollectionReference by lazy { mFirestore.collection("Products") } // TODO save this literal elsewhere
     private val mProductList: MutableList<Product> = mutableListOf()
+    private val mNotificationManager: MySimpleImmutableNotificationManagerHelper by lazy {
+        MySimpleImmutableNotificationManagerHelper.Builder.buildMySimpleImmutableNotificationManagerHelper(this)
+    }
 
     private val newProductCallback = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
@@ -38,6 +42,7 @@ class ProductListActivity : AppCompatActivity() {
                 it.update("id", it.id).addOnSuccessListener {
                     mProductList.add(product)
                     mBinding.recyclerView.adapter?.notifyDataSetChanged()
+                    mNotificationManager.sendNotification("${product.name} added successfully!")
                 }
             }
         }
@@ -51,6 +56,7 @@ class ProductListActivity : AppCompatActivity() {
                     product.id = it.id
                     it.update("id", it.id).addOnSuccessListener {
                         query()
+                        mNotificationManager.sendNotification("${product.name} updated successfully!")
                     }
                 }
             }
@@ -94,6 +100,7 @@ class ProductListActivity : AppCompatActivity() {
             mCollection.document(it.id).delete().addOnSuccessListener { _ ->
                 mProductList.remove(it)
                 adapter.notifyDataSetChanged()
+                mNotificationManager.sendNotification("${it.name} deleted successfully!")
             }
         }
         mBinding.recyclerView.adapter = adapter
