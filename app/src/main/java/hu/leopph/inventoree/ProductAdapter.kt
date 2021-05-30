@@ -40,7 +40,7 @@ class ProductAdapter(
             val filtered = mutableListOf<Product>()
 
             for (product in mAllProductList)
-                if (product.name.contains(filter))
+                if (product.name.lowercase().contains(filter))
                     filtered.add(product)
 
             ret.count = filtered.size
